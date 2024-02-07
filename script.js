@@ -1,20 +1,22 @@
 document.getElementById("button").addEventListener('click',()=>{
-    let inputValue = document.getElementById('inputName').value 
-    let details = document.getElementById("details")
-    details.innerHTML = ""
-    fetch(`https:www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
+    let inputValue = document.getElementById('inputName').value;
+    console.log('Input Value:', inputValue); // Add this line to log the input value
+    let details = document.getElementById("details");
+    details.innerHTML = "";
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
         .then(response => response.json())
         .then(data=> {
-            const items = document.getElementById("items")
-            items.innerHTML = ""
+            console.log('API Response:', data); // Add this line to log the API response
+            const items = document.getElementById("items");
+            items.innerHTML = "";
             if(data.meals == null){
-                document.getElementById("msg").style.display = "block"
-            }else{
-                document.getElementById("msg").style.display = "none"
+                document.getElementById("msg").style.display = "block";
+            } else {
+                document.getElementById("msg").style.display = "none";
                 data.meals.forEach(meal =>{
-                    itemDiv = document.createElement("div")
-                    itemDiv.className = "m-2 singleItem"
-                    itemDiv.setAttribute('onclick' , `details('${meal.idMeal}')`)
+                    itemDiv = document.createElement("div");
+                    itemDiv.className = "m-2 singleItem";
+                    itemDiv.setAttribute('onclick' , `details('${meal.idMeal}')`);
                     let  itemInfo = `
                     <div class="card " style="width: 12rem;">
                         <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
@@ -22,24 +24,27 @@ document.getElementById("button").addEventListener('click',()=>{
                             <h5 class="card-text">${meal.strMeal}</h5>
                         </div>
                     </div>
-                    ` 
-                    itemDiv.innerHTML = itemInfo
-                    items.appendChild(itemDiv)
-                })
+                    `;
+                    itemDiv.innerHTML = itemInfo;
+                    items.appendChild(itemDiv);
+                });
             }
 
         })
-})
+        .catch(error => {
+            console.error('Error fetching API:', error); // Log any errors
+        });
+});
 
 function details(id){
-    fetch(`https:www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then(res=>res.json())
     .then(detail => {
-        let meal = detail.meals[0]
-        console.log(meal)
-        let details = document.getElementById("details")
-        details.innerHTML = ""
-        let detailsDiv = document.createElement("div")
+        let meal = detail.meals[0];
+        console.log(meal);
+        let details = document.getElementById("details");
+        details.innerHTML = "";
+        let detailsDiv = document.createElement("div");
         let detailsInfo = `
         <div class="card " style="width: 19rem;">
             <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
@@ -57,8 +62,8 @@ function details(id){
                 </ul>
             </div>
         </div>
-        `
-        detailsDiv.innerHTML = detailsInfo
-        details.appendChild(detailsDiv)
-    })
+        `;
+        detailsDiv.innerHTML = detailsInfo;
+        details.appendChild(detailsDiv);
+    });
 }
