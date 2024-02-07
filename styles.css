@@ -1,0 +1,59 @@
+.container {
+    background-image: url('https://img.freepik.com/premium-photo/white-wooden-banner-cooking-top-view-free-space-your-text-rustic-style_187166-17842.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-bottom: 20px;
+    min-height: 100vh;
+}
+
+.headName {
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.titleBackground {
+    background-color: rgba(152, 78, 78, 0.976);
+    padding: 5px 10px; 
+    border-radius: 5px;
+}
+
+
+#msg {
+    text-align: center;
+    color: #dc3545;
+    display: none;
+    margin-bottom: 20px;
+}
+
+#items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.singleItem {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.singleItem:hover {
+    transform: scale(1.05);
+}
+
+#details {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
